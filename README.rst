@@ -2,17 +2,22 @@
 pi-sensor platform
 ==================
 
-sudo apt-get install -y python3-pip python3-virtualenv virtualenv
-sudo apt-get install -y python3-gpiozero i2c-tools
+sudo apt-get install -y python3-pip python3-virtualenv virtualenv python3-gpiozero i2c-tools
 virtualenv --python=python3 env
-env/bin/pip3 install Adafruit_DHT adafruit-circuitpython-bmp3xx adafruit-circuitpython-sgp30 adafruit-circuitpython-mcp9808 adafruit-circuitpython-tsl2561 prometheus_client
+env/bin/pip3 install Adafruit_DHT adafruit-circuitpython-bmp3xx adafruit-circuitpython-sgp30 adafruit-circuitpython-tsl2591 prometheus_client
 
 # adafruit-circuitpython-dht
 
-i2c https://learn.adafruit.com/adafruits-raspberry-pi-lesson-4-gpio-setup/configuring-i2c
+I2C
 
-sudo i2cdetect -y 1
-# 0 for older boards
+
+https://learn.adafruit.com/adafruits-raspberry-pi-lesson-4-gpio-setup/configuring-i2c
+Address List: https://learn.adafruit.com/i2c-addresses/the-list
+
+::
+   sudo i2cdetect -y 1
+
+0 for older boards
 
 Sensors
 =======
@@ -25,16 +30,6 @@ https://www.adafruit.com/product/385
 
 https://github.com/adafruit/Adafruit_Python_DHT
 https://github.com/adafruit/Adafruit_CircuitPython_DHT
-
-
-MCP9808 - High Accuracy I2C Temperature Sensor
-----------------------------------------------
-
-https://www.adafruit.com/product/1782
-https://learn.adafruit.com/adafruit-mcp9808-precision-i2c-temperature-sensor-guide
-https://circuitpython.readthedocs.io/projects/mcp9808/en/latest/
-
-i2c Address: 0x18
 
 
 BMP388 - Precision Barometric Pressure and Altimeter
@@ -58,10 +53,35 @@ https://circuitpython.readthedocs.io/projects/sgp30/en/latest/
 
 i2c Address: 0x58 (can not be changed)
 
+https://learn.adafruit.com/adafruit-tsl2591
+
+TSL2591 - Luminosity
+--------------------
+
+https://www.adafruit.com/product/1980
+https://learn.adafruit.com/adafruit-tsl2591
+https://circuitpython.readthedocs.io/projects/tsl2591/en/latest/
+i2c Address: 0x29
+
+Old Sensors
+============
+
+
+MCP9808 - High Accuracy I2C Temperature Sensor
+----------------------------------------------
+
+pip install adafruit-circuitpython-mcp9808 
+
+https://www.adafruit.com/product/1782
+https://learn.adafruit.com/adafruit-mcp9808-precision-i2c-temperature-sensor-guide
+https://circuitpython.readthedocs.io/projects/mcp9808/en/latest/
+
+i2c Address: 0x18
 
 TSL2561 - Luminosity
 --------------------
 
+pip install adafruit-circuitpython-tsl2561
 https://www.adafruit.com/product/439
 https://learn.adafruit.com/tsl2561/overview
 https://circuitpython.readthedocs.io/projects/tsl2561/en/latest/

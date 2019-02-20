@@ -1,8 +1,7 @@
 import adafruit_bmp3xx
 import Adafruit_DHT
-import adafruit_mcp9808
 import adafruit_sgp30
-import adafruit_tsl2561
+import adafruit_tsl2591
 import board
 import busio
 
@@ -78,17 +77,19 @@ class DHT22(Sensor):
         }
 
 
-class MCP9808(I2CSensor):
-    """High precision Temperature Sensor"""
-    sensor_cls = adafruit_mcp9808.MCP9808
-    units = {
-        'temperature': 'C',
-    }
+# import adafruit_mcp9808
 
-    def read(self):
-        return {
-            'temperature': self.sensor.temperature
-        }
+# class MCP9808(I2CSensor):
+#     """High precision Temperature Sensor"""
+#     sensor_cls = adafruit_mcp9808.MCP9808
+#     units = {
+#         'temperature': 'C',
+#     }
+
+#     def read(self):
+#         return {
+#             'temperature': self.sensor.temperature
+#         }
 
 
 class SGP30(I2CSensor):
@@ -125,26 +126,24 @@ class SGP30(I2CSensor):
         }
 
 
-class TSL2561(I2CSensor):
+class TSL2591(I2CSensor):
     """Luminosity Sensor"""
-    sensor_cls = adafruit_tsl2561.TSL2561
+    sensor_cls = adafruit_tsl2591.TSL2591
     units = {
         'lux': 'lux',
-        'broadband': '',  # TODO What unit are these in?
+        'visible': '',  # TODO What unit are these in?
         'infrared': '',
+        'full_spectrum': '',
     }
 
     # TODO allow configuration of the gain / integration_time
 
     def read(self):
-        broadband, infrared = self.sensor.luminosity
-        # computed lux value
-        lux = self.sensor.lux
-
         return {
-            'lux': lux,
-            'broadband': broadband,
-            'infrared': infrared,
+            'lux': self.sensor.lux,
+            'visible': self.sensor.visible,
+            'infrared': self.sensor.infrared,
+            'full_spectrum': self.sensor.full_spectrum,
         }
 
 
@@ -154,10 +153,10 @@ def main():
 
     sensors = [
         BMP388(i2c),
-        DHT22(4),
-        MCP9808(i2c),
+        DHT22(25),
+        # MCP9808(i2c),
         SGP30(i2c),
-        TSL2561(i2c),
+        TSL2591(i2c),
     ]
 
     from prometheus_client import start_http_server, Gauge  # Summary
