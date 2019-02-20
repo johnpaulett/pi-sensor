@@ -20,7 +20,7 @@ class Sensor(object):
     def safe_read(self):
         try:
             return self.read()
-        except OSError as e:
+        except (OSError, RuntimeError) as e:
             # TODO better logging than print()
             print('{}: {}'.format(self.name, e))
             return None
