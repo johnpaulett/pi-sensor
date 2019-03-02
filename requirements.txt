@@ -1,0 +1,13 @@
+Adafruit-Blinka==1.2.3
+adafruit-circuitpython-bmp3xx==1.1.1
+adafruit-circuitpython-busdevice==2.2.9
+adafruit-circuitpython-sgp30==2.0.1
+adafruit-circuitpython-tsl2591==1.1.2
+Adafruit-DHT==1.4.0
+Adafruit-PlatformDetect==0.0.10
+Adafruit-PureIO==0.2.3
+prometheus-client==0.5.0
+rpi-ws281x==4.1.0
+RPi.GPIO==0.6.5
+spidev==3.2
+sysv-ipc==1.0.0
